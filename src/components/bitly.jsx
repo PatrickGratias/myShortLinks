@@ -26,6 +26,10 @@ function Bitly() {
       });
   };
 
+  const handleClicktoCopy = () => {
+    navigator.clipboard.writeText(shortUrl);
+  }
+
   return (
     <section>
       <div className="form-box">
@@ -42,20 +46,17 @@ function Bitly() {
             </div>
             <button type="button" onClick={handleClickToShort}>Shorten URL</button>
             {shortUrl && (
+              <>
               <div className="inputbox">
                 <input 
                   className="shorturl" 
                   type="text"
                   value={shortUrl}
                 />
-                <div className="formbutton">
-                  <input 
-                    type="button"
-                    value="Copy URL"
-                    onclick={navigator.clipboard.writeText(shortUrl)}
-                    />
-                </div>
+                <label htmlFor="">Short URL</label>
               </div>
+              <button type="button" onClick={handleClicktoCopy}>Copy URL</button>
+              </>
             )}
           </form>
         </div>
