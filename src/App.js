@@ -1,5 +1,5 @@
 import './App.css';
-import Bitly from './components/bitly.js'
+import Bitly from './components/bitly.jsx'
 
 function App() {
   return (
