@@ -28,7 +28,7 @@ function Bitly() {
     fetch("https://api-ssl.bitly.com/v4/shorten", {
       method: "POST",
       headers: {
-        Authorization: `Bearer 73e7701cb6e9bbc4ad232de321dd59a730152b34`,
+        Authorization: `Bearer 103c1c5859580e5f70aa8ffb2af2f7892eef142a`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
@@ -50,6 +50,7 @@ function Bitly() {
 
   const handleClicktoCopy = () => {
     navigator.clipboard.writeText(shortUrl);
+    alert("Copy to clipboard successful.")
   }
 
   return (
