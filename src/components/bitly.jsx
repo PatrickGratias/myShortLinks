@@ -5,8 +5,26 @@ function Bitly() {
   const [longUrl, setLongUrl] = useState("");
   const [shortUrl, setShortUrl] = useState("");
 
+  const charMatches = (string, char) => {
+    const arr = string.split("");
+    return arr.filter((c) => c === char).length;
+  }
+
+  const completeUrl = (url) => {
+    let newUrl = "";
+    if (!url.startsWith("http")) {
+      newUrl = "http://";
+    }
+    if (charMatches(url, ".") < 2) {
+      newUrl = newUrl + "www.";
+    }
+    newUrl = newUrl + url;
+    return newUrl;
+  }
+
   const handleClickToShort = () => {
-    console.log(longUrl);
+    let readyUrl = completeUrl(longUrl);
+    console.log(readyUrl);
     fetch("https://api-ssl.bitly.com/v4/shorten", {
       method: "POST",
       headers: {
@@ -14,15 +32,19 @@ function Bitly() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        long_url: longUrl,
+        long_url: readyUrl,
       }),
     })
       .then((response) => response.json())
       .then((data) => {
-        setShortUrl(data.link);
+        console.log(data);
+        if (data.description === "The value provided is invalid.") {alert("Url is not valid!")}
+        else
+          setShortUrl(data.link);
       })
       .catch((error) => {
         console.log(error);
+        
       });
   };
 
@@ -38,7 +60,7 @@ function Bitly() {
             <h2>Short URL</h2>
             <div className="inputbox">
             <input
-              type="text"
+              type="url"
               value={longUrl}
               onChange={(event) => setLongUrl(event.target.value)}
             />
