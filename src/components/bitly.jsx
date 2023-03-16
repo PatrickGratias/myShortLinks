@@ -60,7 +60,7 @@ function Bitly() {
             <h2>Short URL</h2>
             <div className="inputbox">
             <input
-              type="url"
+              type="text"
               value={longUrl}
               onChange={(event) => setLongUrl(event.target.value)}
             />
